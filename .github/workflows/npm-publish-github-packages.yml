@@ -1,4 +1,4 @@
-name: Build React Native App (Node.js 20)
+name: 🚀 Build React Native App (Node.js 20.x)
 
 on:
   push:
@@ -17,25 +17,23 @@ jobs:
         node-version: [20.x]
 
     steps:
-      - name: ⬇️ Checkout Repository
-        uses: actions/checkout@v3
+      - name: ⬇️ Checkout Code
+        uses: actions/checkout@v4
 
-      - name: ⚙️ Setup Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
+      - name: ⚙️ Set up Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
+          cache: 'npm'
 
       - name: 📦 Install Dependencies
-        run: |
-          npm install
+        run: npm ci
 
       - name: 🧪 Run Lint (Optional)
-        run: |
-          npm run lint || true
+        run: npm run lint || echo "No lint script"
 
-      - name: 🚀 Build App (Web or Android)
-        run: |
-          npm run build || echo "Add your build script here"
+      - name: 🏗️ Build App
+        run: npm run build || echo "No build script defined"
 
-      - name: ✅ Complete
-        run: echo "✅ Build process completed!"
+      - name: ✅ Done
+        run: echo "✅ Build complete using Node.js 20.x"
