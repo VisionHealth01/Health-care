@@ -1,0 +1,2 @@
+import ReminderScreen from './src/screens/ReminderScreen';
+<Stack.Screen name="Reminders" component={ReminderScreen} />
