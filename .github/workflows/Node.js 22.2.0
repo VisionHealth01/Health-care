@@ -1,4 +1,4 @@
-name: 🚀 Build React Native App (Node.js 22.x with Cache)
+name: 🚀 Build React Native App (Node.js 22.2.0 with Cache)
 
 on:
   push:
@@ -10,18 +10,14 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [22.x]
-
     steps:
       - name: ⬇️ Checkout Repository
         uses: actions/checkout@v4
 
-      - name: ⚙️ Setup Node.js
+      - name: ⚙️ Setup Node.js v22.2.0
         uses: actions/setup-node@v4
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: 22.2.0
           cache: 'npm'
 
       - name: 💾 Cache node_modules
@@ -33,13 +29,13 @@ jobs:
             ${{ runner.os }}-node-
 
       - name: 📦 Install Dependencies
-        run: npm install
+        run: npm ci
 
       - name: ✅ Run Lint (Optional)
         run: npm run lint || true
 
-      - name: 🏗 Build Project
-        run: npm run build || echo "No build script defined"
+      - name: 🏗️ Build Project
+        run: npm run build || echo "⚠️ No build script defined"
 
-      - name: 🎉 Done
-        run: echo "✅ Node.js 22 CI completed!"
+      - name: ✅ Done
+        run: echo "✅ CI build complete using Node.js 22.2.0"
