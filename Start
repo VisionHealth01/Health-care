@@ -1,0 +1,7 @@
+"scripts": {
+  "start": "react-native start",
+  "android": "react-native run-android",
+  "ios": "react-native run-ios",
+  "build": "echo 'Add EAS or custom build logic here'",
+  "lint": "eslint ."
+}
