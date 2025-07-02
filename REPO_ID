@@ -1,0 +1,40 @@
+gh repo clone VisionHealth01/Health-care
+{
+  "name": "Main Branch Protection",
+  "target": {
+    "repository_id": "REPO_ID",
+    "type": "branch",
+    "pattern": "main"
+  },
+  "rules": {
+    "required_status_checks": {
+      "strict": true,
+      "checks": []
+    },
+    "required_pull_request_reviews": {
+      "dismiss_stale_reviews": true,
+      "require_code_owner_reviews": false,
+      "required_approving_review_count": 1
+    },
+    "pull_request": {
+      "required": true
+    },
+    "force_push": {
+      "enabled": false
+    },
+    "delete": {
+      "enabled": false
+    },
+    "non_admin_push": {
+      "enabled": false
+    },
+    "required_signatures": {
+      "enabled": false
+    }
+  },
+  "bypass_actors": {
+    "actor_ids": [],
+    "actor_type": "team"
+  },
+  "enforcement": "active"
+}
