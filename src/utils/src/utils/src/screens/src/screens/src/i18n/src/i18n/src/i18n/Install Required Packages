@@ -1,0 +1,2 @@
+npx expo install expo-av
+npm install expo-speech react-native-voice
