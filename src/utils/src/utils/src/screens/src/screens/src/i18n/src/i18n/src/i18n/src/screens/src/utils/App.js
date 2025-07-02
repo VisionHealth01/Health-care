@@ -1,0 +1,3 @@
+import MedAwarenessScreen from './src/screens/MedAwarenessScreen';
+// ...
+<Stack.Screen name="Med Awareness" component={MedAwarenessScreen} />
