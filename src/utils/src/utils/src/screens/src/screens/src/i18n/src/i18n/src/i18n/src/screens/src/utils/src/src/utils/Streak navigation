@@ -1,0 +1,2 @@
+import StreakScreen from './src/screens/StreakScreen';
+<Stack.Screen name="Streaks" component={StreakScreen} />
