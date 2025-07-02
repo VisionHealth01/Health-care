@@ -1,1 +1,3 @@
-npm install react-native-onboarding-swiper
+rm -rf node_modules
+rm package-lock.json
+npm install
