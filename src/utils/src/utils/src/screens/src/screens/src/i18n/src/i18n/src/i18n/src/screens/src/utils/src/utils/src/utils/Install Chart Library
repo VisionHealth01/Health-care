@@ -1,0 +1,2 @@
+npm install victory-native react-native-svg
+npx expo install react-native-svg
