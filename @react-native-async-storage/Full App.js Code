@@ -1,0 +1,62 @@
+import React, { useEffect, useState } from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { onAuthStateChanged } from 'firebase/auth';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+import { auth } from './src/utils/firebase';
+
+import LoginScreen from './src/screens/LoginScreen';
+import RegisterScreen from './src/screens/RegisterScreen';
+import DashboardScreen from './src/screens/DashboardScreen';
+import JournalScreen from './src/screens/JournalScreen';
+import MoodGraphScreen from './src/screens/MoodGraphScreen';
+import MeditationScreen from './src/screens/MeditationScreen';
+import ReminderScreen from './src/screens/ReminderScreen';
+import StreakScreen from './src/screens/StreakScreen';
+import ChatbotScreen from './src/screens/ChatbotScreen';
+import ProfileScreen from './src/screens/ProfileScreen';
+import VoiceJournalScreen from './src/screens/VoiceJournalScreen';
+import OnboardingScreen from './src/screens/OnboardingScreen';
+
+const Stack = createNativeStackNavigator();
+
+export default function App() {
+  const [initialRoute, setInitialRoute] = useState(null);
+
+  useEffect(() => {
+    const checkUserAndOnboarding = async () => {
+      const hasSeen = await AsyncStorage.getItem('hasSeenOnboarding');
+      onAuthStateChanged(auth, user => {
+        if (user) {
+          setInitialRoute(hasSeen ? 'Dashboard' : 'Onboarding');
+        } else {
+          setInitialRoute('Login');
+        }
+      });
+    };
+
+    checkUserAndOnboarding();
+  }, []);
+
+  if (!initialRoute) return null;
+
+  return (
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName={initialRoute} screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="Onboarding" component={OnboardingScreen} />
+        <Stack.Screen name="Login" component={LoginScreen} />
+        <Stack.Screen name="Register" component={RegisterScreen} />
+        <Stack.Screen name="Dashboard" component={DashboardScreen} />
+        <Stack.Screen name="Journal" component={JournalScreen} />
+        <Stack.Screen name="Mood" component={MoodGraphScreen} />
+        <Stack.Screen name="Meditation" component={MeditationScreen} />
+        <Stack.Screen name="Reminders" component={ReminderScreen} />
+        <Stack.Screen name="Streaks" component={StreakScreen} />
+        <Stack.Screen name="Chatbot" component={ChatbotScreen} />
+        <Stack.Screen name="VoiceJournal" component={VoiceJournalScreen} />
+        <Stack.Screen name="Profile" component={ProfileScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
