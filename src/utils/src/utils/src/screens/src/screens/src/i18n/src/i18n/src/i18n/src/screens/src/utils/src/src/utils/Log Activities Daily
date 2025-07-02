@@ -1,0 +1,5 @@
+await addDoc(collection(db, 'activity_logs'), {
+  uid: auth.currentUser.uid,
+  type: 'journal',
+  createdAt: Timestamp.now()
+});
