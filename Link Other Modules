@@ -1,0 +1,7 @@
+<Stack.Screen name="Journal" component={JournalScreen} />
+<Stack.Screen name="Chatbot" component={ChatbotScreen} />
+<Stack.Screen name="Mood" component={MoodGraphScreen} />
+<Stack.Screen name="Meditation" component={MeditationScreen} />
+<Stack.Screen name="Reminders" component={ReminderScreen} />
+<Stack.Screen name="Streaks" component={StreakScreen} />
+<Stack.Screen name="Profile" component={ProfileScreen} />
