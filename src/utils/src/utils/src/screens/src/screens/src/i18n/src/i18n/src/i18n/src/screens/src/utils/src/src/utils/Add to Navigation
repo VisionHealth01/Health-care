@@ -1,0 +1,2 @@
+import VoiceJournalScreen from './src/screens/VoiceJournalScreen';
+<Stack.Screen name="Voice Journal" component={VoiceJournalScreen} />
