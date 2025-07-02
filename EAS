@@ -1,0 +1,1 @@
+"build": "eas build -p android --non-interactive"
