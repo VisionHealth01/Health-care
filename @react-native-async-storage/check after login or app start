@@ -1,0 +1,11 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+const checkFirstTime = async () => {
+  const hasSeen = await AsyncStorage.getItem('hasSeenOnboarding');
+  if (!hasSeen) {
+    await AsyncStorage.setItem('hasSeenOnboarding', 'true');
+    navigation.replace('Onboarding');
+  } else {
+    navigation.replace('Dashboard');
+  }
+};
