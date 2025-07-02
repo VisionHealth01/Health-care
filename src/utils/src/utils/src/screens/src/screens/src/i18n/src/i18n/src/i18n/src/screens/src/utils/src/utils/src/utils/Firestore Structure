@@ -1,0 +1,6 @@
+journals (collection)
+ ├─ {autoDocId}
+     ├─ uid: 'user123'
+     ├─ entry: 'I feel tired but okay'
+     ├─ mood: 'Neutral — some fatigue, but stable'
+     ├─ createdAt: timestamp
