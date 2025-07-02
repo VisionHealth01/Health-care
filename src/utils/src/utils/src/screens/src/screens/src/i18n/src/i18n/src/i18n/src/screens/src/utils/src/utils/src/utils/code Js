@@ -1,0 +1,86 @@
+import React, { useEffect, useState } from 'react';
+import { View, Text, ActivityIndicator, StyleSheet, Dimensions } from 'react-native';
+import { VictoryChart, VictoryLine, VictoryAxis, VictoryTheme } from 'victory-native';
+import { collection, query, where, getDocs, orderBy } from 'firebase/firestore';
+import { auth, db } from '../utils/firebase';
+
+export default function MoodGraphScreen() {
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  const moodToScore = (moodText) => {
+    if (!moodText) return 0;
+    const lower = moodText.toLowerCase();
+    if (lower.includes('positive') || lower.includes('happy') || lower.includes('hopeful')) return 3;
+    if (lower.includes('neutral') || lower.includes('okay')) return 2;
+    if (lower.includes('sad') || lower.includes('negative') || lower.includes('anxious')) return 1;
+    return 2; // default neutral
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const user = auth.currentUser;
+        const q = query(
+          collection(db, 'journals'),
+          where('uid', '==', user.uid),
+          orderBy('createdAt', 'asc')
+        );
+
+        const snapshot = await getDocs(q);
+        const graphData = [];
+
+        snapshot.forEach(doc => {
+          const { createdAt, mood } = doc.data();
+          if (createdAt) {
+            graphData.push({
+              x: new Date(createdAt.seconds * 1000).toLocaleDateString(),
+              y: moodToScore(mood)
+            });
+          }
+        });
+
+        setData(graphData);
+        setLoading(false);
+      } catch (err) {
+        console.error(err);
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  return (
+    <View style={styles.container}>
+      <Text style={styles.header}>📈 Mood Over Time</Text>
+      {loading ? (
+        <ActivityIndicator size="large" />
+      ) : (
+        <VictoryChart
+          theme={VictoryTheme.material}
+          width={Dimensions.get('window').width - 20}
+          domain={{ y: [0, 4] }}
+        >
+          <VictoryAxis
+            tickFormat={(x) => x}
+            style={{ tickLabels: { fontSize: 10, angle: -45 } }}
+          />
+          <VictoryAxis dependentAxis tickFormat={['😢', '😐', '😊']} />
+          <VictoryLine
+            data={data}
+            interpolation="monotoneX"
+            style={{
+              data: { stroke: '#007AFF', strokeWidth: 3 }
+            }}
+          />
+        </VictoryChart>
+      )}
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: { flex: 1, padding: 20, backgroundColor: '#fff' },
+  header: { fontSize: 22, fontWeight: 'bold', marginBottom: 20, textAlign: 'center' }
+});
