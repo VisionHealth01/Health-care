@@ -1,0 +1,25 @@
+const analyzeMood = async () => {
+  if (!entry.trim()) {
+    Alert.alert('Please write something.');
+    return;
+  }
+
+  setLoading(true);
+  const result = await getMoodFromText(entry);
+  setMood(result);
+  setLoading(false);
+
+  try {
+    const user = auth.currentUser;
+    await addDoc(collection(db, 'journals'), {
+      uid: user.uid,
+      entry,
+      mood: result,
+      createdAt: serverTimestamp()
+    });
+    Alert.alert('Saved ✅', 'Your journal entry and mood were saved securely.');
+  } catch (err) {
+    console.error('Firestore save error:', err);
+    Alert.alert('Error saving journal');
+  }
+};
