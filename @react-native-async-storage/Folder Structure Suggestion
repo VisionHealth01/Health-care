@@ -1,0 +1,19 @@
+/assets
+/src
+  /screens
+    LoginScreen.js
+    RegisterScreen.js
+    DashboardScreen.js
+    JournalScreen.js
+    VoiceJournalScreen.js
+    ChatbotScreen.js
+    MeditationScreen.js
+    ReminderScreen.js
+    StreakScreen.js
+    ProfileScreen.js
+    OnboardingScreen.js
+    MoodGraphScreen.js
+  /utils
+    firebase.js
+    config.js
+    voice.js
