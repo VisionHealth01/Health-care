@@ -1,5 +1,57 @@
 {
+  "name": "health-friends-app",
+  "version": "1.0.0",
+  "description": "Multilingual AI-powered Mental Health & Telemedicine App",
+  "main": "index.js",
   "scripts": {
-    "eas-build-pre-install": "corepack enable && yarn set version 4"
+    "start": "react-native start",
+    "android": "react-native run-android",
+    "ios": "react-native run-ios",
+    "build": "echo 'Add EAS build or Expo export logic here'",
+    "test": "jest",
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/YOUR_USERNAME/health-friends-app.git"
+  },
+  "keywords": [
+    "mental-health",
+    "react-native",
+    "ai",
+    "firebase",
+    "multilingual",
+    "telemedicine"
+  ],
+  "author": "Vishal Harkal",
+  "license": "MIT",
+  "dependencies": {
+    "@react-native-async-storage/async-storage": "^1.19.0",
+    "@react-navigation/native": "^6.1.6",
+    "@react-navigation/native-stack": "^6.9.12",
+    "axios": "^1.6.8",
+    "firebase": "^9.24.0",
+    "openai": "^4.14.0",
+    "react": "18.2.0",
+    "react-native": "0.73.2",
+    "react-native-safe-area-context": "^4.6.3",
+    "react-native-screens": "^3.24.0",
+    "react-native-vector-icons": "^10.0.0",
+    "react-native-gesture-handler": "^2.12.1",
+    "expo-speech": "^11.3.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.22.20",
+    "@react-native/eslint-config": "^0.74.0",
+    "eslint": "^8.55.0",
+    "jest": "^29.6.2",
+    "react-test-renderer": "18.2.0"
+  },
+  "private": false,
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
   }
 }
